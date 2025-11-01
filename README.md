@@ -33,6 +33,11 @@ Xir bir hile değil, gelişmiş bir bypass loader sistemidir. Herhangi bir exe d
 11. Sistemi yeniden başlatınız.
 12. Yeniden açılan sistemde kullanıcıdan Xir’i çalıştırması ve giriş yapması istenir. Giriş başarılı olduğu takdirde kurulum tamamlanmış sayılır.
 
+Kurulum sırasında bat programında hata alırsanız ve paketler yüklenmez ise cmd yi yönetici olarak çalıştırıp bu komutu yazınız.
+
+pip install bidict blinker certifi cffi charset-normalizer click colorama cryptography customtkinter darkdetect Deprecated dnspython eventlet extract-icon Flask Flask-Limiter Flask-SocketIO Flask-WTF greenlet gunicorn h11 idna itsdangerous Jinja2 keyboard limits markdown-it-py MarkupSafe mdurl Nuitka ordered-set packaging pefile pillow plyer psutil pycparser pycryptodome Pygments pynput pypiwin32 python-engineio python-socketio pywin32 requests rich simple-websocket six typing_extensions urllib3 Werkzeug win10toast WMI wrapt wsproto WTForms zstandard pyautogui opencv-python pygame
+
+
 
 ## Uyarı
 
