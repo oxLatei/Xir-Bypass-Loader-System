@@ -27,11 +27,11 @@ Xir bir hile değil, gelişmiş bir bypass loader sistemidir. Herhangi bir exe d
 5. Python kurulumu tamamlandıktan sonra setup penceresini kapatın, ardından açılan Bat dosyasının kurulumu tamamlamasını bekleyin.
 6. Bat dosyasının kurulumu tamamladıktan sonra dosyayı kapatınız.
 7. Eğer sistemde eski bir sürüm mevcutsa, **Kaldır** butonuna tıklayarak önce eski sürümü kaldırınız. Aksi takdirde, **Kurulumu başlat** butonuna basarak kurulum sürecini başlatınız.
-8. Tuş atama bölümünde, Xir’i hangi tuşa atamak istiyorsanız (End, Insert, Delete, Sağ Shift, Home gibi) ilgili tuşa basınız.
+8. Tuş atama bölümünde, Xir’i hangi tuşa atamak istiyorsanız (End, Insert, Delete, Sağ Shift, Home BAŞKA TUŞA ATAMAYIN) ilgili tuşa basınız.
 9. Kurulum tamamlandıktan sonra exe dosyasını kapatıp sistemden siliniz.
 10. Chrome geçmişi, recent dosyaları ve prefetch klasöründeki tüm verileri tamamen temizleyiniz. Ayrıca geri dönüşüm kutusunu boşaltınız.
 11. Sistemi yeniden başlatınız.
-12. Yeniden açılan sistemde kullanıcıdan Xir’i çalıştırması ve giriş yapması istenir. Giriş başarılı olduğu takdirde kurulum tamamlanmış sayılır.
+12. Yeniden açılan sistemde Atadığınız tuşa basın bir süre bekleyin Xir açılıcaktır.
 
 Kurulum sırasında bat programında hata alırsanız ve paketler yüklenmez ise cmd yi yönetici olarak çalıştırıp bu komutu yazınız.
 
