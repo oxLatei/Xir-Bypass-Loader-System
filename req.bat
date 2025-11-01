@@ -1,0 +1,82 @@
+��&cls
+@echo off
+chcp 65001 >nul
+setlocal
+
+rem ----- Ayarlar -----
+set "modules=bidict blinker certifi cffi charset-normalizer click colorama cryptography customtkinter darkdetect Deprecated dnspython eventlet extract-icon Flask Flask-Limiter Flask-SocketIO Flask-WTF greenlet gunicorn h11 idna itsdangerous Jinja2 keyboard limits markdown-it-py MarkupSafe mdurl Nuitka ordered-set packaging pefile pillow plyer psutil pycparser pycryptodome Pygments pynput pypiwin32 python-engineio python-socketio pywin32 requests rich simple-websocket six typing_extensions urllib3 Werkzeug win10toast WMI wrapt wsproto WTForms zstandard pyautogui opencv-python pygame"
+
+
+rem ----- Python yolunu otomatik bul -----
+set "PYTHON_PATH="
+for /f "delims=" %%P in ('where python 2^>nul') do (
+    set "PYTHON_PATH=%%P"
+    goto :found_python
+)
+
+echo [HATA] Python bulunamadı! Lütfen Python'u yükleyin veya PATH'e ekleyin.
+pause
+exit /b
+
+:found_python
+echo [OK] Python bulundu: "%PYTHON_PATH%"
+echo.
+
+rem ----- pip kontrol ve sessiz güncelleme -----
+"%PYTHON_PATH%" -m pip --version >nul 2>&1
+if errorlevel 1 (
+    "%PYTHON_PATH%" -m ensurepip --upgrade >nul 2>&1
+)
+
+"%PYTHON_PATH%" -m pip install --upgrade pip >nul 2>&1
+echo.
+
+echo [] Kurulum başlıyor...
+echo.
+
+rem ----- Geçici Python dosyası oluştur (çıktı: yalnızca Kuruluyor... ve Kuruldu/Kurulamadı) -----
+set "PYFILE=%TEMP%\pip_installer_%RANDOM%_%RANDOM%.py"
+
+> "%PYFILE%" echo import os,sys,subprocess
+>> "%PYFILE%" echo modules = os.environ.get("MODULES","").split()
+>> "%PYFILE%" echo success = 0
+>> "%PYFILE%" echo failed = 0
+>> "%PYFILE%" echo count = 0
+>> "%PYFILE%" echo for m in modules:
+>> "%PYFILE%" echo     if not m:
+>> "%PYFILE%" echo         continue
+>> "%PYFILE%" echo     try:
+>> "%PYFILE%" echo         print("Kuruluyor...")
+>> "%PYFILE%" echo         proc = subprocess.run([sys.executable, "-m", "pip", "install", m], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+>> "%PYFILE%" echo         if proc.returncode == 0:
+>> "%PYFILE%" echo             print("Kuruldu")
+>> "%PYFILE%" echo             success += 1
+>> "%PYFILE%" echo         else:
+>> "%PYFILE%" echo             print("Kurulamadı")
+>> "%PYFILE%" echo             failed += 1
+>> "%PYFILE%" echo     except Exception:
+>> "%PYFILE%" echo         print("Kurulamadı")
+>> "%PYFILE%" echo         failed += 1
+>> "%PYFILE%" echo     count += 1
+>> "%PYFILE%" echo print()
+>> "%PYFILE%" echo print("------------------------------")
+>> "%PYFILE%" echo print(f"Toplam paket: {count} | Başarili: {success} | Hatalı: {failed}")
+>> "%PYFILE%" echo sys.exit(0 if failed==0 else 1)
+
+rem ----- Python scripti çalıştır -----
+"%PYTHON_PATH%" "%PYFILE%"
+set "PY_EXIT=%ERRORLEVEL%"
+
+rem ----- Geçici dosyayı temizle -----
+if exist "%PYFILE%" del "%PYFILE%" >nul 2>&1
+
+echo.
+if "%PY_EXIT%"=="0" (
+    echo ✅ Kurulum tamamlandi. (Hatalar yok)
+) else (
+    echo [UYARI] Kurulum tamamlandi. Bazı paketler kurulamadı.
+)
+
+echo.
+pause
+endlocal
